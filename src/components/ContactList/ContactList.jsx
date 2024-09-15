@@ -1,26 +1,26 @@
+import { useSelector } from "react-redux";
+import { selectContacts } from "../../redux/contactsSlice.js";
+import { selectNameFilter } from "../../redux/filtersSlice.js";
 import Contact from "../Contact/Contact";
-
-// import { IoPerson } from "react-icons/io5";
-// import { FaPhoneAlt } from "react-icons/fa";
-
 import css from "./ContactList.module.css";
 
-// const iconPerson = <IoPerson key={1} />;
-// const iconPhone = <FaPhoneAlt key={2} />;
+export default function ContactList() {
+  // 2. Отримуємо масив завдань із стану Redux
+  const contacts = useSelector(selectContacts);
 
-export default function ContactList({ contacts, onDelete }) {
+  // 3. Отримуємо значення фільтра із стану Redux
+  const statusFilter = useSelector(selectNameFilter);
+
+  // 4. Обчислюємо масив завдань, які необхідно відображати в інтерфейсі
+
+  const visibleContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(statusFilter.toLowerCase())
+  );
+
   return (
     <ul className={css.contactList}>
-      {contacts.map(({ id, name, number }) => (
-        <Contact
-          key={id}
-          id={id}
-          name={name}
-          number={number}
-          // iconPerson={iconPerson}
-          // iconPhone={iconPhone}
-          onDelete={onDelete}
-        />
+      {visibleContacts.map(({ id, name, number }) => (
+        <Contact key={id} id={id} name={name} number={number} />
       ))}
     </ul>
   );

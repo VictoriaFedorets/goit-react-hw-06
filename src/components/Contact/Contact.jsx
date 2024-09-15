@@ -3,10 +3,14 @@ import { IoPerson } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 
 import css from "./Contact.module.css";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 
-export default function Contact({ name, number, id, onDelete }) {
-  const handleDelete = () => {
-    onDelete(id);
+export default function Contact({ name, number, id }) {
+  const dispatch = useDispatch();
+
+  const handleDelete = id => {
+    dispatch(deleteContact(id));
   };
   return (
     <li className={css.contactList}>
@@ -27,7 +31,7 @@ export default function Contact({ name, number, id, onDelete }) {
       </div>
 
       <div>
-        <button type="button" onClick={handleDelete}>
+        <button type="button" onClick={() => handleDelete(id)}>
           Delete
         </button>
       </div>
