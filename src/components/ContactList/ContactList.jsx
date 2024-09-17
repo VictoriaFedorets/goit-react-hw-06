@@ -5,13 +5,13 @@ import Contact from "../Contact/Contact";
 import css from "./ContactList.module.css";
 
 export default function ContactList() {
-  // 2. Отримуємо масив завдань із стану Redux
+  // 1. Отримуємо масив контактів із стану Redux
   const contacts = useSelector(selectContacts);
 
-  // 3. Отримуємо значення фільтра із стану Redux
+  // 2. Отримуємо значення фільтра із стану Redux
   const statusFilter = useSelector(selectNameFilter);
 
-  // 4. Обчислюємо масив завдань, які необхідно відображати в інтерфейсі
+  // 3. Обчислюємо масив контактів, які необхідно відображати в інтерфейсі
 
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(statusFilter.toLowerCase())

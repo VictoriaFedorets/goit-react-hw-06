@@ -9,6 +9,8 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
+export const selectContacts = state => state.contacts.items;
+
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
@@ -21,21 +23,28 @@ const contactsSlice = createSlice({
   },
   reducers: {
     addContact: (state, action) => {
-      return {
-        ...state,
-        items: [...state.items, action.payload],
-      };
+      // з іммер
+      state.items.push(action.payload);
+      // без іммер
+      // return {
+      //   ...state,
+      //   items: [...state.items, action.payload],
+      // };
     },
     deleteContact: (state, action) => {
-      return {
-        ...state,
-        items: state.items.filter(contact => contact.id !== action.payload),
-      };
+      state.items = state.items.filter(
+        contact => contact.id !== action.payload
+      );
+
+      // return {
+      //   ...state,
+      //   items: state.items.filter(contact => contact.id !== action.payload),
+      // };
     },
   },
 });
 
-export const selectContacts = state => state.contacts.items;
+// console.log(contactsSlice);
 
 export const { addContact, deleteContact } = contactsSlice.actions;
 

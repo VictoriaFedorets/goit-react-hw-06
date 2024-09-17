@@ -8,6 +8,8 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
+export const selectNameFilter = state => state.filters.name;
+
 const filtersSlice = createSlice({
   name: "filters",
   initialState: {
@@ -22,8 +24,6 @@ const filtersSlice = createSlice({
     },
   },
 });
-
-export const selectNameFilter = state => state.filters.name;
 
 // Експортуємо фабрики екшенів
 export const { changeFilter } = filtersSlice.actions;
